@@ -1,0 +1,727 @@
+{
+  "name": "Github multi AI agent code reviewer",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/Ayush07571",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "periodic-table",
+          "mode": "list",
+          "cachedResultName": "periodic-table",
+          "cachedResultUrl": "https://github.com/Ayush07571/periodic-table"
+        },
+        "events": [
+          "pull_request"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        -64
+      ],
+      "id": "0f268719-901c-4ee4-b6bb-03cea789342d",
+      "name": "Github Trigger",
+      "webhookId": "569bc528-e266-4ba5-b480-2f632209b9d8",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "C7sYdFQrYTPj0Yr8",
+          "name": "GitHub account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{$json.body.sender.login}}/{{$json.body.repository.name}}/pulls/{{$json.body.number}}/files",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -224,
+        -64
+      ],
+      "id": "f87e1ef0-8364-46a9-afcb-b32df12e9aa5",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const files = $input.all().map(item => item.json);\n\nlet diffs = '';\n\nfor (const file of files) {\n  diffs += `### Fichier : ${file.filename}\\n\\n`;\n\n  if (file.patch) {\n    // IMPORTANT : On remplace tous les triple backticks par simple (ou échappement)\n    const safePatch = file.patch.replace(/```/g, \"''\");\n\n    diffs += \"```diff\\n\";\n    diffs += safePatch;\n    diffs += \"\\n```\\n\";\n  } else {\n    diffs += \"_Pas de patch disponible (probablement fichier binaire)._\";\n  }\n\n  diffs += \"\\n---\\n\\n\";\n}\n\nconst userMessage = `\nYou are a senior web developer. \nPlease review the following code changes in these files :\n\n${diffs}\n\n---\n\nYour mission:\n- Generate a detailed inline comment witht he problem in the PR request (if there exists any) and the solution to it (if there exists any)\n- Review the proposed code changes file by file and by significant modification.\n\n- Generate inline comments on the relevant lines of code.\n\n- Ignore files without patches.\n\n- Do not repeat the code snippet or the filename.\n\n- Write the comments directly, without introducing the context.\n`;\n\nreturn [\n  {\n    json: {\n      user_message: userMessage.trim()\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "fd952472-0064-4904-b402-13ce21bfa23f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.user_message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        400,
+        -48
+      ],
+      "id": "f750de89-69ca-404f-ac32-7dbf54e0bb60",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "nvidia/nemotron-3-nano-30b-a3b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        384,
+        128
+      ],
+      "id": "fda4906a-df28-46a1-ab49-643804ebc6c7",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "ifsQZrr1csgzqFEs",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg",
+          "mode": "list",
+          "cachedResultName": "best coding practices - github n8n trial",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        592,
+        144
+      ],
+      "id": "a4ce558c-6bdd-4d36-964b-0fb189bbd991",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LzKEk6TIFScK964G",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "ayushkaran328@gmail.com",
+        "subject": "Action needed: Review the comment going to be posted",
+        "message": "=Pull request info:\nRepo name: {{ $('Github Trigger').item.json.body.pull_request.head.repo.name }}\nPull Request by: {{ $('Github Trigger').item.json.body.pull_request.user.login }}\nPull request id: {{ $('Github Trigger').item.json.body.pull_request.user.id }}\nPull request title: {{ $('Github Trigger').item.json.body.pull_request.title }}\nPull request description: {{ $('Github Trigger').item.json.body.pull_request.body }}\nAI generated comment: {{ $json.output }}",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Should we post this?",
+              "fieldType": "dropdown",
+              "defaultValue": "No",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1472,
+        -80
+      ],
+      "id": "ed7a54bf-88a0-463c-81ca-2212347d3397",
+      "name": "Send message and wait for response",
+      "webhookId": "80d558be-e5f2-4db8-97c7-59ed68b8982a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8D2GURbNGdm3YdPt",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "review",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/Ayush07571",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "periodic-table",
+          "mode": "list",
+          "cachedResultName": "periodic-table",
+          "cachedResultUrl": "https://github.com/Ayush07571/periodic-table"
+        },
+        "pullRequestNumber": "={{ $('Github Trigger').item.json.body.number }}",
+        "event": "comment",
+        "body": "={{ $('AI Agent').item.json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        1904,
+        -64
+      ],
+      "id": "bf9a1b14-be65-482b-b189-d35fb14683cb",
+      "name": "Create a review",
+      "webhookId": "3016eb2d-e237-4025-8038-7bf926e6100c",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "C7sYdFQrYTPj0Yr8",
+          "name": "GitHub account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/Ayush07571",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "periodic-table",
+          "mode": "list",
+          "cachedResultName": "periodic-table",
+          "cachedResultUrl": "https://github.com/Ayush07571/periodic-table"
+        },
+        "issueNumber": "={{ $('Github Trigger').item.json.body.number }}",
+        "editFields": {
+          "labels": [
+            {
+              "label": "ReviewedByAI"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        2112,
+        -64
+      ],
+      "id": "0bef55b2-e36b-4446-a978-2ecbf021e407",
+      "name": "Edit an issue",
+      "webhookId": "473feab3-970a-4f5e-93ea-89425247b5d9",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "C7sYdFQrYTPj0Yr8",
+          "name": "GitHub account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c6cc15d2-d0e3-42ba-9f79-5e36f807f19c",
+              "leftValue": "={{ $json.data['Should we post this?'] }}",
+              "rightValue": "Yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1696,
+        -64
+      ],
+      "id": "de8bfc49-ed45-4773-9f72-36e61e0e650e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "user_message",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        192,
+        -64
+      ],
+      "id": "a418b90f-07e5-4709-a2b6-3cdbe39c91d6",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.user_message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        384,
+        -368
+      ],
+      "id": "86736030-d420-4f96-9efb-34adfc34d723",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.user_message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        400,
+        368
+      ],
+      "id": "fb08523f-a40d-470c-a7bb-e31704591400",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "include": "specifiedFields",
+        "fieldsToInclude": "output, output, output",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        848,
+        -80
+      ],
+      "id": "28108551-871d-4efe-8250-97652683219d",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "model": "deepseek/deepseek-chat",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        368,
+        -192
+      ],
+      "id": "c78acf96-7bf1-4768-94ef-e6c4f16d65a0",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "RTDX1dAzX4tFAEde",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg",
+          "mode": "list",
+          "cachedResultName": "best coding practices - github n8n trial",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        576,
+        -208
+      ],
+      "id": "c53d0c4d-f1af-4140-9864-4cfd39fd413d",
+      "name": "Get row(s) in sheet in Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LzKEk6TIFScK964G",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openrouter/free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        368,
+        528
+      ],
+      "id": "3f333f69-47d5-4ae7-9de9-85f8b03c0e73",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "ifsQZrr1csgzqFEs",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg",
+          "mode": "list",
+          "cachedResultName": "best coding practices - github n8n trial",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1j7buVu7CapOGd1bzXdpi2NTxnCsU7MpZlnQFbKd14Bg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        592,
+        528
+      ],
+      "id": "130653b8-fe83-4213-85a4-9d4979e3f4d8",
+      "name": "Get row(s) in sheet in Google Sheets2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "LzKEk6TIFScK964G",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=make the following comment more efficient by making sure that one thing if specified isn't repated again and also nothing such as github comment, inline comment, etc. in mentioned in the comment. also make it such that it looks like a suggestion from the user rather than ai generated comment. don't add anything extra from your side, just keep the info mentioned in the provided comment and nothing extra.\ncomment: \n{{ $json.data[0].output }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1056,
+        -80
+      ],
+      "id": "19124e74-a88d-4876-aa6d-9e8932aad001",
+      "name": "AI Agent3"
+    },
+    {
+      "parameters": {
+        "model": "nvidia/nemotron-nano-12b-v2-vl:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        96
+      ],
+      "id": "9f81b879-f6e8-45c3-8199-83fce2dfeff6",
+      "name": "OpenRouter Chat Model3",
+      "credentials": {
+        "openRouterApi": {
+          "id": "RTDX1dAzX4tFAEde",
+          "name": "OpenRouter account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message and wait for response": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a review": {
+      "main": [
+        [
+          {
+            "node": "Edit an issue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Create a review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent3": {
+      "main": [
+        [
+          {
+            "node": "Send message and wait for response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "f8f46637-4dd0-4b5a-b6d2-ffe8078fa869",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "27dec3950cc190b35c3bee02e1ef984b4d440979ae014cc101a282b038a1c4de"
+  },
+  "id": "Zpwk8DpghPkPfTTX",
+  "tags": []
+}
