@@ -1,28 +1,40 @@
 # 🤖 Multi-Agent Sequential Code Reviewer (n8n)
 
-A high-fidelity GitHub Pull Request reviewer built on n8n that utilizes a **Sequential Self-Refinement Loop**. Instead of a single-pass analysis, this workflow chains multiple specialized AI agents to audit, critique, and humanize code suggestions before they are presented to the developer.
+A high-fidelity GitHub Pull Request reviewer built on n8n that utilizes a **Smart Sequential Refinement Loop**. This workflow dynamically routes PRs based on size and uses a multi-stage AI pipeline to ensure technical accuracy and human-like feedback.
 
-## 🚀 The "Chain of Thought" Architecture
-This workflow implements a 4-stage sequential pipeline to ensure maximum accuracy and helpful, "human-like" feedback:
+## 🚀 The "Smart Pipeline" Architecture
 
-* **Stage 1: The Initial Auditor (AI Agent 1)** Receives the raw `git diff` from the GitHub Trigger and performs the first pass review using the **DeepSeek Chat** model.
-  
-* **Stage 2: The Critical Reviewer (AI Agent)** Analyzes the first agent's output, identifies missed issues, and suggests enhancements to the initial findings. It leverages **Nvidia Nemotron-3** for a distinct technical perspective.
+This workflow implements a logic-aware pipeline that adapts to the size of the contribution:
 
-* **Stage 3: The Synthesizer (AI Agent 2)** Combines the findings from the previous stages into a single cohesive response while eliminating redundancies. It ensures the feedback is comprehensive yet efficient.
+### 🚦 The Routing Logic (`If1` Node)
 
-* **Stage 4: The Polishing Agent (AI Agent 3)** Final pass to "humanize" the comment. It strictly formats the output into a concise **3-4 line summary** to ensure readability on GitHub.
+* **Large PRs (>20 Changes):** Trigger the full **4-Stage Sequential Loop** for deep analysis.
+* **Small PRs (≤20 Changes):** Route to the **Fast-Track Auditor (AI Agent 4)** for a supportive, one-sentence verification to avoid over-engineering small updates.
+
+### 🧠 The Sequential Loop (Large PRs)
+
+1. **Stage 1: Initial Auditor (AI Agent 1):** Performs the first pass review using **Step-3.5-Flash**, focusing on general logic and code quality.
+2. **Stage 2: Critical Reviewer (AI Agent):** Analyzes the first output to identify missed gaps or technical debt using **Nvidia Nemotron-3**.
+3. **Stage 3: Synthesizer (AI Agent 2):** Consolidates findings from previous agents, removing redundancies and ensuring the feedback is cohesive.
+4. **Stage 4: Polishing Agent (AI Agent 3):** Uses **Nvidia Nemotron-12b** to "humanize" the tone and strictly format the output into a 3-4 line summary.
 
 ## 🛡️ Reliability & Oversight
-* **Human-in-the-Loop:** After 4 stages of AI refinement, the final comment is sent to the user via Gmail for a manual "Yes/No" approval.
-* **Pre-Processing:** A custom JavaScript node cleans the code diffs, escapes formatting-breakers (like backticks), and removes binary data to ensure prompt stability.
-* **Automated Labeling:** Upon successful review, the GitHub PR is automatically tagged with a `ReviewedByAI` label.
+
+* **Human-in-the-Loop:** Before any comment is posted to GitHub, the workflow sends the finalized suggestion to the user via **Gmail**. The user must approve it via a dropdown form ("Yes/No").
+* **Safe-String Processing:** A JavaScript node pre-processes the `git diff`, escaping backticks and triple backticks to prevent formatting breaks in the AI prompts.
+* **Automatic Labeling:** Once a review is approved and posted, the PR is automatically tagged with a `ReviewedByAI` label for project tracking.
 
 ## 🛠️ Setup Instructions
-1. **Import:** Download the `github-ai-reviewer.json` from this repo and import it into your n8n instance.
-2. **Credentials:** Set up your credentials for **GitHub (OAuth2)**, **Gmail (OAuth2)**, and **OpenRouter**.
-3. **Webhook:** Configure the GitHub Trigger node to listen for `pull_request` events on your target repository.
-4. **Deploy:** Set the workflow to **Active** and start receiving automated, high-quality code reviews.
+
+1. **Import:** Download the `Github_multi_AI_agent_code_reviewer.json` and import it into your n8n instance.
+2. **Credentials:** * **GitHub (OAuth2):** For triggers, posting comments, and labeling.
+* **Gmail (OAuth2):** For the manual approval step.
+* **OpenRouter:** For access to Step-3.5 and Nvidia Nemotron models.
+
+
+3. **Webhook:** Configure the GitHub Trigger to listen for `pull_request` events on your target repository.
+4. **Deploy:** Set the workflow to **Active**.
 
 ## 🧠 Why this works
-By moving from parallel agents to a **Sequential Refinement** model, the system acts as its own "Senior Architect." If the first agent misses a security flaw or a logic error, the subsequent agents are specifically prompted to find those gaps and correct the previous response.
+
+By combining **Dynamic Routing** with **Sequential Refinement**, the system provides deep technical audits for complex changes while remaining lightweight and supportive for minor documentation or style updates. This prevents "AI fatigue" for developers receiving the feedback.
