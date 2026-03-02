@@ -38,3 +38,14 @@ This workflow implements a logic-aware pipeline that adapts to the size of the c
 ## 🧠 Why this works
 
 By combining **Dynamic Routing** with **Sequential Refinement**, the system provides deep technical audits for complex changes while remaining lightweight and supportive for minor documentation or style updates. This prevents "AI fatigue" for developers receiving the feedback.
+
+This is a great addition. Since this is a college project, showing that you understand the **social** and **operational** challenges of Open Source (not just the technical ones) will make your work stand out to professors and recruiters.
+
+## 🌟 Open Source & Educational Impact
+
+This project was designed specifically to bridge the gap between **Student Contributors** and **Maintainers** in the open-source ecosystem.
+
+* **Reducing Maintainer Burnout:** For project owners, the "Cognitive Load" of switching from development to reviewing a messy PR is high. This tool acts as a **Teaching Assistant**, pre-digesting diffs into actionable summaries.
+* **Instant Feedback Loop:** New contributors often lose interest if their PR sits unaddressed for days. This bot provides immediate, high-quality technical feedback, keeping the momentum of the contribution alive.
+* **AI-Powered Mentorship:** By using a **Sequential Refinement** model, the feedback isn't just a list of errors—it’s a structured suggestion that explains the *why* behind a fix, helping students learn better coding patterns.
+* **Lowering the Barrier to Entry:** Automated labeling (`ReviewedByAI`) and human-in-the-loop approval ensure that the repository remains professional and welcoming, encouraging more students to submit their first pull request.
