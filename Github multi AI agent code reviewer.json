@@ -6,7 +6,7 @@
         "authentication": "oAuth2",
         "owner": {
           "__rl": true,
-          "value": "https://github.com/Ayush07571",
+          "value": "https://github.com/ayush07571",
           "mode": "url"
         },
         "repository": {
@@ -25,7 +25,7 @@
       "typeVersion": 1,
       "position": [
         -432,
-        -240
+        48
       ],
       "id": "0f268719-901c-4ee4-b6bb-03cea789342d",
       "name": "Github Trigger",
@@ -46,7 +46,7 @@
       "typeVersion": 4.4,
       "position": [
         -208,
-        -240
+        48
       ],
       "id": "f87e1ef0-8364-46a9-afcb-b32df12e9aa5",
       "name": "HTTP Request"
@@ -59,7 +59,7 @@
       "typeVersion": 2,
       "position": [
         16,
-        -240
+        48
       ],
       "id": "fd952472-0064-4904-b402-13ce21bfa23f",
       "name": "Code in JavaScript"
@@ -73,11 +73,12 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        592,
-        -240
+        816,
+        -160
       ],
       "id": "f750de89-69ca-404f-ac32-7dbf54e0bb60",
-      "name": "AI Agent"
+      "name": "AI Agent",
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -87,8 +88,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        592,
-        0
+        896,
+        80
       ],
       "id": "fda4906a-df28-46a1-ab49-643804ebc6c7",
       "name": "OpenRouter Chat Model",
@@ -130,8 +131,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1872,
-        -240
+        2096,
+        48
       ],
       "id": "ed7a54bf-88a0-463c-81ca-2212347d3397",
       "name": "Send message and wait for response",
@@ -167,8 +168,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2320,
-        -240
+        2544,
+        48
       ],
       "id": "bf9a1b14-be65-482b-b189-d35fb14683cb",
       "name": "Create a review",
@@ -208,8 +209,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2544,
-        -240
+        2768,
+        48
       ],
       "id": "0bef55b2-e36b-4446-a978-2ecbf021e407",
       "name": "Edit an issue",
@@ -248,8 +249,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2096,
-        -240
+        2320,
+        48
       ],
       "id": "de8bfc49-ed45-4773-9f72-36e61e0e650e",
       "name": "If"
@@ -263,11 +264,12 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        240,
-        -240
+        464,
+        -160
       ],
       "id": "86736030-d420-4f96-9efb-34adfc34d723",
-      "name": "AI Agent1"
+      "name": "AI Agent1",
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -278,29 +280,30 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        944,
-        -240
+        1168,
+        -160
       ],
       "id": "fb08523f-a40d-470c-a7bb-e31704591400",
-      "name": "AI Agent2"
+      "name": "AI Agent2",
+      "retryOnFail": true
     },
     {
       "parameters": {
-        "model": "deepseek/deepseek-chat",
+        "model": "stepfun/step-3.5-flash:free",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        240,
-        -16
+        544,
+        80
       ],
       "id": "c78acf96-7bf1-4768-94ef-e6c4f16d65a0",
       "name": "OpenRouter Chat Model1",
       "credentials": {
         "openRouterApi": {
-          "id": "RTDX1dAzX4tFAEde",
-          "name": "OpenRouter account 2"
+          "id": "05ue2qutgBr3TomH",
+          "name": "OpenRouter account 5"
         }
       }
     },
@@ -312,8 +315,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        944,
-        0
+        1248,
+        80
       ],
       "id": "3f333f69-47d5-4ae7-9de9-85f8b03c0e73",
       "name": "OpenRouter Chat Model2",
@@ -333,11 +336,12 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        1296,
-        -240
+        1520,
+        -256
       ],
       "id": "a4827255-5aef-479a-8762-87e323984fca",
-      "name": "AI Agent3"
+      "name": "AI Agent3",
+      "retryOnFail": true
     },
     {
       "parameters": {
@@ -347,8 +351,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1296,
-        0
+        1600,
+        -32
       ],
       "id": "68be30c9-5d61-4ea6-a96d-19ed8e8b53fb",
       "name": "OpenRouter Chat Model3",
@@ -376,555 +380,83 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1648,
-        -240
+        1872,
+        48
       ],
       "id": "98afe57d-22d0-4503-a167-cfbd68cd4573",
       "name": "Edit Fields"
-    }
-  ],
-  "pinData": {
-    "Github Trigger": [
-      {
-        "json": {
-          "body": {
-            "action": "opened",
-            "number": 2,
-            "pull_request": {
-              "url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/2",
-              "id": 3301461727,
-              "node_id": "PR_kwDONZkQ0M7EyE7f",
-              "html_url": "https://github.com/Ayush07571/periodic-table/pull/2",
-              "diff_url": "https://github.com/Ayush07571/periodic-table/pull/2.diff",
-              "patch_url": "https://github.com/Ayush07571/periodic-table/pull/2.patch",
-              "issue_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/2",
-              "number": 2,
-              "state": "open",
-              "locked": false,
-              "title": "Test n8n",
-              "user": {
-                "login": "Hariom-Handloom",
-                "id": 72331239,
-                "node_id": "MDQ6VXNlcjcyMzMxMjM5",
-                "avatar_url": "https://avatars.githubusercontent.com/u/72331239?v=4",
-                "gravatar_id": "",
-                "url": "https://api.github.com/users/Hariom-Handloom",
-                "html_url": "https://github.com/Hariom-Handloom",
-                "followers_url": "https://api.github.com/users/Hariom-Handloom/followers",
-                "following_url": "https://api.github.com/users/Hariom-Handloom/following{/other_user}",
-                "gists_url": "https://api.github.com/users/Hariom-Handloom/gists{/gist_id}",
-                "starred_url": "https://api.github.com/users/Hariom-Handloom/starred{/owner}{/repo}",
-                "subscriptions_url": "https://api.github.com/users/Hariom-Handloom/subscriptions",
-                "organizations_url": "https://api.github.com/users/Hariom-Handloom/orgs",
-                "repos_url": "https://api.github.com/users/Hariom-Handloom/repos",
-                "events_url": "https://api.github.com/users/Hariom-Handloom/events{/privacy}",
-                "received_events_url": "https://api.github.com/users/Hariom-Handloom/received_events",
-                "type": "User",
-                "user_view_type": "public",
-                "site_admin": false
-              },
-              "body": "added a bit of more description",
-              "created_at": "2026-02-19T05:29:29Z",
-              "updated_at": "2026-02-19T05:29:29Z",
-              "closed_at": null,
-              "merged_at": null,
-              "merge_commit_sha": null,
-              "assignee": null,
-              "assignees": [],
-              "requested_reviewers": [],
-              "requested_teams": [],
-              "labels": [],
-              "milestone": null,
-              "draft": false,
-              "commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/2/commits",
-              "review_comments_url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/2/comments",
-              "review_comment_url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/comments{/number}",
-              "comments_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/2/comments",
-              "statuses_url": "https://api.github.com/repos/Ayush07571/periodic-table/statuses/c3d826420d52b44b2f991faf487f1769381e88a7",
-              "head": {
-                "label": "Ayush07571:test-n8n",
-                "ref": "test-n8n",
-                "sha": "c3d826420d52b44b2f991faf487f1769381e88a7",
-                "user": {
-                  "login": "Ayush07571",
-                  "id": 178201552,
-                  "node_id": "U_kgDOCp8j0A",
-                  "avatar_url": "https://avatars.githubusercontent.com/u/178201552?v=4",
-                  "gravatar_id": "",
-                  "url": "https://api.github.com/users/Ayush07571",
-                  "html_url": "https://github.com/Ayush07571",
-                  "followers_url": "https://api.github.com/users/Ayush07571/followers",
-                  "following_url": "https://api.github.com/users/Ayush07571/following{/other_user}",
-                  "gists_url": "https://api.github.com/users/Ayush07571/gists{/gist_id}",
-                  "starred_url": "https://api.github.com/users/Ayush07571/starred{/owner}{/repo}",
-                  "subscriptions_url": "https://api.github.com/users/Ayush07571/subscriptions",
-                  "organizations_url": "https://api.github.com/users/Ayush07571/orgs",
-                  "repos_url": "https://api.github.com/users/Ayush07571/repos",
-                  "events_url": "https://api.github.com/users/Ayush07571/events{/privacy}",
-                  "received_events_url": "https://api.github.com/users/Ayush07571/received_events",
-                  "type": "User",
-                  "user_view_type": "public",
-                  "site_admin": false
-                },
-                "repo": {
-                  "id": 899223760,
-                  "node_id": "R_kgDONZkQ0A",
-                  "name": "periodic-table",
-                  "full_name": "Ayush07571/periodic-table",
-                  "private": false,
-                  "owner": {
-                    "login": "Ayush07571",
-                    "id": 178201552,
-                    "node_id": "U_kgDOCp8j0A",
-                    "avatar_url": "https://avatars.githubusercontent.com/u/178201552?v=4",
-                    "gravatar_id": "",
-                    "url": "https://api.github.com/users/Ayush07571",
-                    "html_url": "https://github.com/Ayush07571",
-                    "followers_url": "https://api.github.com/users/Ayush07571/followers",
-                    "following_url": "https://api.github.com/users/Ayush07571/following{/other_user}",
-                    "gists_url": "https://api.github.com/users/Ayush07571/gists{/gist_id}",
-                    "starred_url": "https://api.github.com/users/Ayush07571/starred{/owner}{/repo}",
-                    "subscriptions_url": "https://api.github.com/users/Ayush07571/subscriptions",
-                    "organizations_url": "https://api.github.com/users/Ayush07571/orgs",
-                    "repos_url": "https://api.github.com/users/Ayush07571/repos",
-                    "events_url": "https://api.github.com/users/Ayush07571/events{/privacy}",
-                    "received_events_url": "https://api.github.com/users/Ayush07571/received_events",
-                    "type": "User",
-                    "user_view_type": "public",
-                    "site_admin": false
-                  },
-                  "html_url": "https://github.com/Ayush07571/periodic-table",
-                  "description": "A user-friendly website showcasing an interactive periodic table. Explore detailed element information with a click and discover sections on periodic trends, history, and mnemonics for easy learning.",
-                  "fork": false,
-                  "url": "https://api.github.com/repos/Ayush07571/periodic-table",
-                  "forks_url": "https://api.github.com/repos/Ayush07571/periodic-table/forks",
-                  "keys_url": "https://api.github.com/repos/Ayush07571/periodic-table/keys{/key_id}",
-                  "collaborators_url": "https://api.github.com/repos/Ayush07571/periodic-table/collaborators{/collaborator}",
-                  "teams_url": "https://api.github.com/repos/Ayush07571/periodic-table/teams",
-                  "hooks_url": "https://api.github.com/repos/Ayush07571/periodic-table/hooks",
-                  "issue_events_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/events{/number}",
-                  "events_url": "https://api.github.com/repos/Ayush07571/periodic-table/events",
-                  "assignees_url": "https://api.github.com/repos/Ayush07571/periodic-table/assignees{/user}",
-                  "branches_url": "https://api.github.com/repos/Ayush07571/periodic-table/branches{/branch}",
-                  "tags_url": "https://api.github.com/repos/Ayush07571/periodic-table/tags",
-                  "blobs_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/blobs{/sha}",
-                  "git_tags_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/tags{/sha}",
-                  "git_refs_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/refs{/sha}",
-                  "trees_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/trees{/sha}",
-                  "statuses_url": "https://api.github.com/repos/Ayush07571/periodic-table/statuses/{sha}",
-                  "languages_url": "https://api.github.com/repos/Ayush07571/periodic-table/languages",
-                  "stargazers_url": "https://api.github.com/repos/Ayush07571/periodic-table/stargazers",
-                  "contributors_url": "https://api.github.com/repos/Ayush07571/periodic-table/contributors",
-                  "subscribers_url": "https://api.github.com/repos/Ayush07571/periodic-table/subscribers",
-                  "subscription_url": "https://api.github.com/repos/Ayush07571/periodic-table/subscription",
-                  "commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/commits{/sha}",
-                  "git_commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/commits{/sha}",
-                  "comments_url": "https://api.github.com/repos/Ayush07571/periodic-table/comments{/number}",
-                  "issue_comment_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/comments{/number}",
-                  "contents_url": "https://api.github.com/repos/Ayush07571/periodic-table/contents/{+path}",
-                  "compare_url": "https://api.github.com/repos/Ayush07571/periodic-table/compare/{base}...{head}",
-                  "merges_url": "https://api.github.com/repos/Ayush07571/periodic-table/merges",
-                  "archive_url": "https://api.github.com/repos/Ayush07571/periodic-table/{archive_format}{/ref}",
-                  "downloads_url": "https://api.github.com/repos/Ayush07571/periodic-table/downloads",
-                  "issues_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues{/number}",
-                  "pulls_url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls{/number}",
-                  "milestones_url": "https://api.github.com/repos/Ayush07571/periodic-table/milestones{/number}",
-                  "notifications_url": "https://api.github.com/repos/Ayush07571/periodic-table/notifications{?since,all,participating}",
-                  "labels_url": "https://api.github.com/repos/Ayush07571/periodic-table/labels{/name}",
-                  "releases_url": "https://api.github.com/repos/Ayush07571/periodic-table/releases{/id}",
-                  "deployments_url": "https://api.github.com/repos/Ayush07571/periodic-table/deployments",
-                  "created_at": "2024-12-05T21:06:13Z",
-                  "updated_at": "2026-02-18T18:26:02Z",
-                  "pushed_at": "2026-02-19T05:29:03Z",
-                  "git_url": "git://github.com/Ayush07571/periodic-table.git",
-                  "ssh_url": "git@github.com:Ayush07571/periodic-table.git",
-                  "clone_url": "https://github.com/Ayush07571/periodic-table.git",
-                  "svn_url": "https://github.com/Ayush07571/periodic-table",
-                  "homepage": "https://ayush07571.github.io/periodic-table/",
-                  "size": 16525,
-                  "stargazers_count": 1,
-                  "watchers_count": 1,
-                  "language": "HTML",
-                  "has_issues": true,
-                  "has_projects": true,
-                  "has_downloads": true,
-                  "has_wiki": true,
-                  "has_pages": true,
-                  "has_discussions": false,
-                  "forks_count": 0,
-                  "mirror_url": null,
-                  "archived": false,
-                  "disabled": false,
-                  "open_issues_count": 1,
-                  "license": null,
-                  "allow_forking": true,
-                  "is_template": false,
-                  "web_commit_signoff_required": false,
-                  "has_pull_requests": true,
-                  "pull_request_creation_policy": "all",
-                  "topics": [],
-                  "visibility": "public",
-                  "forks": 0,
-                  "open_issues": 1,
-                  "watchers": 1,
-                  "default_branch": "main",
-                  "allow_squash_merge": true,
-                  "allow_merge_commit": true,
-                  "allow_rebase_merge": true,
-                  "allow_auto_merge": false,
-                  "delete_branch_on_merge": false,
-                  "allow_update_branch": false,
-                  "use_squash_pr_title_as_default": false,
-                  "squash_merge_commit_message": "COMMIT_MESSAGES",
-                  "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
-                  "merge_commit_message": "PR_TITLE",
-                  "merge_commit_title": "MERGE_MESSAGE"
-                }
-              },
-              "base": {
-                "label": "Ayush07571:main",
-                "ref": "main",
-                "sha": "4f3247026ac84c1da3340075b01f0b4e6960104a",
-                "user": {
-                  "login": "Ayush07571",
-                  "id": 178201552,
-                  "node_id": "U_kgDOCp8j0A",
-                  "avatar_url": "https://avatars.githubusercontent.com/u/178201552?v=4",
-                  "gravatar_id": "",
-                  "url": "https://api.github.com/users/Ayush07571",
-                  "html_url": "https://github.com/Ayush07571",
-                  "followers_url": "https://api.github.com/users/Ayush07571/followers",
-                  "following_url": "https://api.github.com/users/Ayush07571/following{/other_user}",
-                  "gists_url": "https://api.github.com/users/Ayush07571/gists{/gist_id}",
-                  "starred_url": "https://api.github.com/users/Ayush07571/starred{/owner}{/repo}",
-                  "subscriptions_url": "https://api.github.com/users/Ayush07571/subscriptions",
-                  "organizations_url": "https://api.github.com/users/Ayush07571/orgs",
-                  "repos_url": "https://api.github.com/users/Ayush07571/repos",
-                  "events_url": "https://api.github.com/users/Ayush07571/events{/privacy}",
-                  "received_events_url": "https://api.github.com/users/Ayush07571/received_events",
-                  "type": "User",
-                  "user_view_type": "public",
-                  "site_admin": false
-                },
-                "repo": {
-                  "id": 899223760,
-                  "node_id": "R_kgDONZkQ0A",
-                  "name": "periodic-table",
-                  "full_name": "Ayush07571/periodic-table",
-                  "private": false,
-                  "owner": {
-                    "login": "Ayush07571",
-                    "id": 178201552,
-                    "node_id": "U_kgDOCp8j0A",
-                    "avatar_url": "https://avatars.githubusercontent.com/u/178201552?v=4",
-                    "gravatar_id": "",
-                    "url": "https://api.github.com/users/Ayush07571",
-                    "html_url": "https://github.com/Ayush07571",
-                    "followers_url": "https://api.github.com/users/Ayush07571/followers",
-                    "following_url": "https://api.github.com/users/Ayush07571/following{/other_user}",
-                    "gists_url": "https://api.github.com/users/Ayush07571/gists{/gist_id}",
-                    "starred_url": "https://api.github.com/users/Ayush07571/starred{/owner}{/repo}",
-                    "subscriptions_url": "https://api.github.com/users/Ayush07571/subscriptions",
-                    "organizations_url": "https://api.github.com/users/Ayush07571/orgs",
-                    "repos_url": "https://api.github.com/users/Ayush07571/repos",
-                    "events_url": "https://api.github.com/users/Ayush07571/events{/privacy}",
-                    "received_events_url": "https://api.github.com/users/Ayush07571/received_events",
-                    "type": "User",
-                    "user_view_type": "public",
-                    "site_admin": false
-                  },
-                  "html_url": "https://github.com/Ayush07571/periodic-table",
-                  "description": "A user-friendly website showcasing an interactive periodic table. Explore detailed element information with a click and discover sections on periodic trends, history, and mnemonics for easy learning.",
-                  "fork": false,
-                  "url": "https://api.github.com/repos/Ayush07571/periodic-table",
-                  "forks_url": "https://api.github.com/repos/Ayush07571/periodic-table/forks",
-                  "keys_url": "https://api.github.com/repos/Ayush07571/periodic-table/keys{/key_id}",
-                  "collaborators_url": "https://api.github.com/repos/Ayush07571/periodic-table/collaborators{/collaborator}",
-                  "teams_url": "https://api.github.com/repos/Ayush07571/periodic-table/teams",
-                  "hooks_url": "https://api.github.com/repos/Ayush07571/periodic-table/hooks",
-                  "issue_events_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/events{/number}",
-                  "events_url": "https://api.github.com/repos/Ayush07571/periodic-table/events",
-                  "assignees_url": "https://api.github.com/repos/Ayush07571/periodic-table/assignees{/user}",
-                  "branches_url": "https://api.github.com/repos/Ayush07571/periodic-table/branches{/branch}",
-                  "tags_url": "https://api.github.com/repos/Ayush07571/periodic-table/tags",
-                  "blobs_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/blobs{/sha}",
-                  "git_tags_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/tags{/sha}",
-                  "git_refs_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/refs{/sha}",
-                  "trees_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/trees{/sha}",
-                  "statuses_url": "https://api.github.com/repos/Ayush07571/periodic-table/statuses/{sha}",
-                  "languages_url": "https://api.github.com/repos/Ayush07571/periodic-table/languages",
-                  "stargazers_url": "https://api.github.com/repos/Ayush07571/periodic-table/stargazers",
-                  "contributors_url": "https://api.github.com/repos/Ayush07571/periodic-table/contributors",
-                  "subscribers_url": "https://api.github.com/repos/Ayush07571/periodic-table/subscribers",
-                  "subscription_url": "https://api.github.com/repos/Ayush07571/periodic-table/subscription",
-                  "commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/commits{/sha}",
-                  "git_commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/commits{/sha}",
-                  "comments_url": "https://api.github.com/repos/Ayush07571/periodic-table/comments{/number}",
-                  "issue_comment_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/comments{/number}",
-                  "contents_url": "https://api.github.com/repos/Ayush07571/periodic-table/contents/{+path}",
-                  "compare_url": "https://api.github.com/repos/Ayush07571/periodic-table/compare/{base}...{head}",
-                  "merges_url": "https://api.github.com/repos/Ayush07571/periodic-table/merges",
-                  "archive_url": "https://api.github.com/repos/Ayush07571/periodic-table/{archive_format}{/ref}",
-                  "downloads_url": "https://api.github.com/repos/Ayush07571/periodic-table/downloads",
-                  "issues_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues{/number}",
-                  "pulls_url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls{/number}",
-                  "milestones_url": "https://api.github.com/repos/Ayush07571/periodic-table/milestones{/number}",
-                  "notifications_url": "https://api.github.com/repos/Ayush07571/periodic-table/notifications{?since,all,participating}",
-                  "labels_url": "https://api.github.com/repos/Ayush07571/periodic-table/labels{/name}",
-                  "releases_url": "https://api.github.com/repos/Ayush07571/periodic-table/releases{/id}",
-                  "deployments_url": "https://api.github.com/repos/Ayush07571/periodic-table/deployments",
-                  "created_at": "2024-12-05T21:06:13Z",
-                  "updated_at": "2026-02-18T18:26:02Z",
-                  "pushed_at": "2026-02-19T05:29:03Z",
-                  "git_url": "git://github.com/Ayush07571/periodic-table.git",
-                  "ssh_url": "git@github.com:Ayush07571/periodic-table.git",
-                  "clone_url": "https://github.com/Ayush07571/periodic-table.git",
-                  "svn_url": "https://github.com/Ayush07571/periodic-table",
-                  "homepage": "https://ayush07571.github.io/periodic-table/",
-                  "size": 16525,
-                  "stargazers_count": 1,
-                  "watchers_count": 1,
-                  "language": "HTML",
-                  "has_issues": true,
-                  "has_projects": true,
-                  "has_downloads": true,
-                  "has_wiki": true,
-                  "has_pages": true,
-                  "has_discussions": false,
-                  "forks_count": 0,
-                  "mirror_url": null,
-                  "archived": false,
-                  "disabled": false,
-                  "open_issues_count": 1,
-                  "license": null,
-                  "allow_forking": true,
-                  "is_template": false,
-                  "web_commit_signoff_required": false,
-                  "has_pull_requests": true,
-                  "pull_request_creation_policy": "all",
-                  "topics": [],
-                  "visibility": "public",
-                  "forks": 0,
-                  "open_issues": 1,
-                  "watchers": 1,
-                  "default_branch": "main",
-                  "allow_squash_merge": true,
-                  "allow_merge_commit": true,
-                  "allow_rebase_merge": true,
-                  "allow_auto_merge": false,
-                  "delete_branch_on_merge": false,
-                  "allow_update_branch": false,
-                  "use_squash_pr_title_as_default": false,
-                  "squash_merge_commit_message": "COMMIT_MESSAGES",
-                  "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
-                  "merge_commit_message": "PR_TITLE",
-                  "merge_commit_title": "MERGE_MESSAGE"
-                }
-              },
-              "_links": {
-                "self": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/2"
-                },
-                "html": {
-                  "href": "https://github.com/Ayush07571/periodic-table/pull/2"
-                },
-                "issue": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/issues/2"
-                },
-                "comments": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/issues/2/comments"
-                },
-                "review_comments": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/2/comments"
-                },
-                "review_comment": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/comments{/number}"
-                },
-                "commits": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/pulls/2/commits"
-                },
-                "statuses": {
-                  "href": "https://api.github.com/repos/Ayush07571/periodic-table/statuses/c3d826420d52b44b2f991faf487f1769381e88a7"
-                }
-              },
-              "author_association": "COLLABORATOR",
-              "auto_merge": null,
-              "active_lock_reason": null,
-              "merged": false,
-              "mergeable": null,
-              "rebaseable": null,
-              "mergeable_state": "unknown",
-              "merged_by": null,
-              "comments": 0,
-              "review_comments": 0,
-              "maintainer_can_modify": false,
-              "commits": 2,
-              "additions": 2,
-              "deletions": 5,
-              "changed_files": 1
-            },
-            "repository": {
-              "id": 899223760,
-              "node_id": "R_kgDONZkQ0A",
-              "name": "periodic-table",
-              "full_name": "Ayush07571/periodic-table",
-              "private": false,
-              "owner": {
-                "login": "Ayush07571",
-                "id": 178201552,
-                "node_id": "U_kgDOCp8j0A",
-                "avatar_url": "https://avatars.githubusercontent.com/u/178201552?v=4",
-                "gravatar_id": "",
-                "url": "https://api.github.com/users/Ayush07571",
-                "html_url": "https://github.com/Ayush07571",
-                "followers_url": "https://api.github.com/users/Ayush07571/followers",
-                "following_url": "https://api.github.com/users/Ayush07571/following{/other_user}",
-                "gists_url": "https://api.github.com/users/Ayush07571/gists{/gist_id}",
-                "starred_url": "https://api.github.com/users/Ayush07571/starred{/owner}{/repo}",
-                "subscriptions_url": "https://api.github.com/users/Ayush07571/subscriptions",
-                "organizations_url": "https://api.github.com/users/Ayush07571/orgs",
-                "repos_url": "https://api.github.com/users/Ayush07571/repos",
-                "events_url": "https://api.github.com/users/Ayush07571/events{/privacy}",
-                "received_events_url": "https://api.github.com/users/Ayush07571/received_events",
-                "type": "User",
-                "user_view_type": "public",
-                "site_admin": false
-              },
-              "html_url": "https://github.com/Ayush07571/periodic-table",
-              "description": "A user-friendly website showcasing an interactive periodic table. Explore detailed element information with a click and discover sections on periodic trends, history, and mnemonics for easy learning.",
-              "fork": false,
-              "url": "https://api.github.com/repos/Ayush07571/periodic-table",
-              "forks_url": "https://api.github.com/repos/Ayush07571/periodic-table/forks",
-              "keys_url": "https://api.github.com/repos/Ayush07571/periodic-table/keys{/key_id}",
-              "collaborators_url": "https://api.github.com/repos/Ayush07571/periodic-table/collaborators{/collaborator}",
-              "teams_url": "https://api.github.com/repos/Ayush07571/periodic-table/teams",
-              "hooks_url": "https://api.github.com/repos/Ayush07571/periodic-table/hooks",
-              "issue_events_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/events{/number}",
-              "events_url": "https://api.github.com/repos/Ayush07571/periodic-table/events",
-              "assignees_url": "https://api.github.com/repos/Ayush07571/periodic-table/assignees{/user}",
-              "branches_url": "https://api.github.com/repos/Ayush07571/periodic-table/branches{/branch}",
-              "tags_url": "https://api.github.com/repos/Ayush07571/periodic-table/tags",
-              "blobs_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/blobs{/sha}",
-              "git_tags_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/tags{/sha}",
-              "git_refs_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/refs{/sha}",
-              "trees_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/trees{/sha}",
-              "statuses_url": "https://api.github.com/repos/Ayush07571/periodic-table/statuses/{sha}",
-              "languages_url": "https://api.github.com/repos/Ayush07571/periodic-table/languages",
-              "stargazers_url": "https://api.github.com/repos/Ayush07571/periodic-table/stargazers",
-              "contributors_url": "https://api.github.com/repos/Ayush07571/periodic-table/contributors",
-              "subscribers_url": "https://api.github.com/repos/Ayush07571/periodic-table/subscribers",
-              "subscription_url": "https://api.github.com/repos/Ayush07571/periodic-table/subscription",
-              "commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/commits{/sha}",
-              "git_commits_url": "https://api.github.com/repos/Ayush07571/periodic-table/git/commits{/sha}",
-              "comments_url": "https://api.github.com/repos/Ayush07571/periodic-table/comments{/number}",
-              "issue_comment_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues/comments{/number}",
-              "contents_url": "https://api.github.com/repos/Ayush07571/periodic-table/contents/{+path}",
-              "compare_url": "https://api.github.com/repos/Ayush07571/periodic-table/compare/{base}...{head}",
-              "merges_url": "https://api.github.com/repos/Ayush07571/periodic-table/merges",
-              "archive_url": "https://api.github.com/repos/Ayush07571/periodic-table/{archive_format}{/ref}",
-              "downloads_url": "https://api.github.com/repos/Ayush07571/periodic-table/downloads",
-              "issues_url": "https://api.github.com/repos/Ayush07571/periodic-table/issues{/number}",
-              "pulls_url": "https://api.github.com/repos/Ayush07571/periodic-table/pulls{/number}",
-              "milestones_url": "https://api.github.com/repos/Ayush07571/periodic-table/milestones{/number}",
-              "notifications_url": "https://api.github.com/repos/Ayush07571/periodic-table/notifications{?since,all,participating}",
-              "labels_url": "https://api.github.com/repos/Ayush07571/periodic-table/labels{/name}",
-              "releases_url": "https://api.github.com/repos/Ayush07571/periodic-table/releases{/id}",
-              "deployments_url": "https://api.github.com/repos/Ayush07571/periodic-table/deployments",
-              "created_at": "2024-12-05T21:06:13Z",
-              "updated_at": "2026-02-18T18:26:02Z",
-              "pushed_at": "2026-02-19T05:29:03Z",
-              "git_url": "git://github.com/Ayush07571/periodic-table.git",
-              "ssh_url": "git@github.com:Ayush07571/periodic-table.git",
-              "clone_url": "https://github.com/Ayush07571/periodic-table.git",
-              "svn_url": "https://github.com/Ayush07571/periodic-table",
-              "homepage": "https://ayush07571.github.io/periodic-table/",
-              "size": 16525,
-              "stargazers_count": 1,
-              "watchers_count": 1,
-              "language": "HTML",
-              "has_issues": true,
-              "has_projects": true,
-              "has_downloads": true,
-              "has_wiki": true,
-              "has_pages": true,
-              "has_discussions": false,
-              "forks_count": 0,
-              "mirror_url": null,
-              "archived": false,
-              "disabled": false,
-              "open_issues_count": 1,
-              "license": null,
-              "allow_forking": true,
-              "is_template": false,
-              "web_commit_signoff_required": false,
-              "has_pull_requests": true,
-              "pull_request_creation_policy": "all",
-              "topics": [],
-              "visibility": "public",
-              "forks": 0,
-              "open_issues": 1,
-              "watchers": 1,
-              "default_branch": "main"
-            },
-            "sender": {
-              "login": "Hariom-Handloom",
-              "id": 72331239,
-              "node_id": "MDQ6VXNlcjcyMzMxMjM5",
-              "avatar_url": "https://avatars.githubusercontent.com/u/72331239?v=4",
-              "gravatar_id": "",
-              "url": "https://api.github.com/users/Hariom-Handloom",
-              "html_url": "https://github.com/Hariom-Handloom",
-              "followers_url": "https://api.github.com/users/Hariom-Handloom/followers",
-              "following_url": "https://api.github.com/users/Hariom-Handloom/following{/other_user}",
-              "gists_url": "https://api.github.com/users/Hariom-Handloom/gists{/gist_id}",
-              "starred_url": "https://api.github.com/users/Hariom-Handloom/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/Hariom-Handloom/subscriptions",
-              "organizations_url": "https://api.github.com/users/Hariom-Handloom/orgs",
-              "repos_url": "https://api.github.com/users/Hariom-Handloom/repos",
-              "events_url": "https://api.github.com/users/Hariom-Handloom/events{/privacy}",
-              "received_events_url": "https://api.github.com/users/Hariom-Handloom/received_events",
-              "type": "User",
-              "user_view_type": "public",
-              "site_admin": false
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "090a9f40-ff27-4d61-9408-5d69f0c1dfb0",
+              "leftValue": "={{ $('HTTP Request').item.json.changes }}",
+              "rightValue": 20,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
             }
-          },
-          "headers": {
-            "host": "ayush07571.app.n8n.cloud",
-            "user-agent": "GitHub-Hookshot/311d7f3",
-            "content-length": "23838",
-            "accept": "*/*",
-            "accept-encoding": "gzip, br",
-            "cdn-loop": "cloudflare; loops=1; subreqs=1",
-            "cf-connecting-ip": "140.82.115.123",
-            "cf-ew-via": "15",
-            "cf-ipcountry": "US",
-            "cf-ray": "9d035df1f06452d6-IAD",
-            "cf-visitor": "{\"scheme\":\"https\"}",
-            "cf-worker": "n8n.cloud",
-            "content-type": "application/json",
-            "x-forwarded-for": "140.82.115.123, 172.70.43.84",
-            "x-forwarded-host": "ayush07571.app.n8n.cloud",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "traefik-prod-users-gwc-120-75977744f8-79cr2",
-            "x-github-delivery": "f6fcdf10-0d53-11f1-89d5-5c5a03348840",
-            "x-github-event": "pull_request",
-            "x-github-hook-id": "596951270",
-            "x-github-hook-installation-target-id": "899223760",
-            "x-github-hook-installation-target-type": "repository",
-            "x-hub-signature": "sha1=d2df9b96ccdb55e5be48990110ba0e2f893fbd45",
-            "x-hub-signature-256": "sha256=26eb01d1435d765270271b6169f9954da7669590911d2c2736b57ea03c4fb0c2",
-            "x-is-trusted": "yes",
-            "x-real-ip": "140.82.115.123"
-          },
-          "query": {}
+          ],
+          "combinator": "and"
         },
-        "pairedItem": {
-          "item": 0
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        240,
+        48
+      ],
+      "id": "b06691e0-742b-4240-89aa-8e2be6fc425c",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# Role: Senior Developer\n# Task: Verify PR safety & intent.\n\nDiff: {{ $json.user_message }}\n\n# Instructions:\n- Only flag logic errors, security risks, or clear typos. \n- If the change is a list or intentional documentation, APPROVE it.\n- Output: 1-sentence supportive suggestion. \n- No intro/fluff.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1520,
+        256
+      ],
+      "id": "8ecf4640-d7b0-40e4-9421-13c3ee393997",
+      "name": "AI Agent4"
+    },
+    {
+      "parameters": {
+        "model": "stepfun/step-3.5-flash:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        480
+      ],
+      "id": "034a2f90-8123-4d31-bacd-154fca50c518",
+      "name": "OpenRouter Chat Model4",
+      "credentials": {
+        "openRouterApi": {
+          "id": "05ue2qutgBr3TomH",
+          "name": "OpenRouter account 5"
         }
       }
-    ]
-  },
+    }
+  ],
+  "pinData": {},
   "connections": {
     "Github Trigger": {
       "main": [
@@ -952,7 +484,7 @@
       "main": [
         [
           {
-            "node": "AI Agent1",
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -1090,6 +622,46 @@
           }
         ]
       ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent4",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent4": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -1098,7 +670,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "651810b4-f567-4d06-a002-729d310e1662",
+  "versionId": "b55d2ad7-2f63-46c5-852b-9ac40a419170",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "27dec3950cc190b35c3bee02e1ef984b4d440979ae014cc101a282b038a1c4de"
