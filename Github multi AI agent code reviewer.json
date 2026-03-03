@@ -25,7 +25,7 @@
       "typeVersion": 1,
       "position": [
         -432,
-        48
+        144
       ],
       "id": "0f268719-901c-4ee4-b6bb-03cea789342d",
       "name": "Github Trigger",
@@ -39,14 +39,14 @@
     },
     {
       "parameters": {
-        "url": "=https://api.github.com/repos/{{$json.body.sender.login}}/{{$json.body.repository.name}}/pulls/{{$json.body.number}}/files",
+        "url": "=https://api.github.com/repos/{{ $json.body.repository.owner.login }}/{{ $json.body.repository.name }}/pulls/{{ $json.body.number }}/files",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.4,
       "position": [
         -208,
-        48
+        144
       ],
       "id": "f87e1ef0-8364-46a9-afcb-b32df12e9aa5",
       "name": "HTTP Request"
@@ -59,7 +59,7 @@
       "typeVersion": 2,
       "position": [
         16,
-        48
+        144
       ],
       "id": "fd952472-0064-4904-b402-13ce21bfa23f",
       "name": "Code in JavaScript"
@@ -73,8 +73,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        816,
-        -160
+        1040,
+        -152
       ],
       "id": "f750de89-69ca-404f-ac32-7dbf54e0bb60",
       "name": "AI Agent",
@@ -88,8 +88,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        896,
-        80
+        1112,
+        72
       ],
       "id": "fda4906a-df28-46a1-ab49-643804ebc6c7",
       "name": "OpenRouter Chat Model",
@@ -131,7 +131,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        2096,
+        2320,
         48
       ],
       "id": "ed7a54bf-88a0-463c-81ca-2212347d3397",
@@ -168,7 +168,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2544,
+        2768,
         48
       ],
       "id": "bf9a1b14-be65-482b-b189-d35fb14683cb",
@@ -209,7 +209,7 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2768,
+        2992,
         48
       ],
       "id": "0bef55b2-e36b-4446-a978-2ecbf021e407",
@@ -249,7 +249,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2320,
+        2544,
         48
       ],
       "id": "de8bfc49-ed45-4773-9f72-36e61e0e650e",
@@ -264,8 +264,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        464,
-        -160
+        688,
+        -152
       ],
       "id": "86736030-d420-4f96-9efb-34adfc34d723",
       "name": "AI Agent1",
@@ -280,8 +280,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        1168,
-        -160
+        1392,
+        -152
       ],
       "id": "fb08523f-a40d-470c-a7bb-e31704591400",
       "name": "AI Agent2",
@@ -295,8 +295,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        544,
-        80
+        760,
+        72
       ],
       "id": "c78acf96-7bf1-4768-94ef-e6c4f16d65a0",
       "name": "OpenRouter Chat Model1",
@@ -315,8 +315,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1248,
-        80
+        1464,
+        72
       ],
       "id": "3f333f69-47d5-4ae7-9de9-85f8b03c0e73",
       "name": "OpenRouter Chat Model2",
@@ -336,7 +336,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        1520,
+        1744,
         -256
       ],
       "id": "a4827255-5aef-479a-8762-87e323984fca",
@@ -351,7 +351,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1600,
+        1816,
         -32
       ],
       "id": "68be30c9-5d61-4ea6-a96d-19ed8e8b53fb",
@@ -380,7 +380,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1872,
+        2096,
         48
       ],
       "id": "98afe57d-22d0-4503-a167-cfbd68cd4573",
@@ -414,7 +414,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        240,
+        464,
         48
       ],
       "id": "b06691e0-742b-4240-89aa-8e2be6fc425c",
@@ -429,8 +429,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        1520,
-        256
+        1744,
+        248
       ],
       "id": "8ecf4640-d7b0-40e4-9421-13c3ee393997",
       "name": "AI Agent4"
@@ -443,8 +443,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        1600,
-        480
+        1816,
+        472
       ],
       "id": "034a2f90-8123-4d31-bacd-154fca50c518",
       "name": "OpenRouter Chat Model4",
@@ -452,6 +452,118 @@
         "openRouterApi": {
           "id": "05ue2qutgBr3TomH",
           "name": "OpenRouter account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7c14d572-8637-4947-b5a4-1ec642db6705",
+              "leftValue": "={{ $('HTTP Request').item.json.changes }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        240,
+        144
+      ],
+      "id": "fd651860-689b-4942-98e2-238a28cdbe4e",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "review",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/ayush07571",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "periodic-table",
+          "mode": "list",
+          "cachedResultName": "periodic-table",
+          "cachedResultUrl": "https://github.com/Ayush07571/periodic-table"
+        },
+        "pullRequestNumber": "={{ $('Github Trigger').item.json.body.number }}",
+        "event": "comment",
+        "body": "This PR is too large for AI review, please wait for a human.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        416
+      ],
+      "id": "e7780d19-5b03-4364-a329-669788231054",
+      "name": "Create a review1",
+      "webhookId": "944169c5-986a-414b-a653-d143f0a802bf",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "C7sYdFQrYTPj0Yr8",
+          "name": "GitHub account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "https://github.com/ayush07571",
+          "mode": "url"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "periodic-table",
+          "mode": "list",
+          "cachedResultName": "periodic-table",
+          "cachedResultUrl": "https://github.com/Ayush07571/periodic-table"
+        },
+        "issueNumber": null,
+        "editFields": {
+          "labels": [
+            {
+              "label": "waitingForHuman"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        752,
+        416
+      ],
+      "id": "8033a07f-6b7f-4401-979c-39e4b2482b8b",
+      "name": "Edit an issue1",
+      "webhookId": "2ad59403-3be1-4bed-a275-ff17152c1820",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "C7sYdFQrYTPj0Yr8",
+          "name": "GitHub account 3"
         }
       }
     }
@@ -484,7 +596,7 @@
       "main": [
         [
           {
-            "node": "If1",
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -662,6 +774,35 @@
           }
         ]
       ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a review1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a review1": {
+      "main": [
+        [
+          {
+            "node": "Edit an issue1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -670,7 +811,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "b55d2ad7-2f63-46c5-852b-9ac40a419170",
+  "versionId": "e63506f1-ccf5-4496-9dd1-103a038df8ab",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "27dec3950cc190b35c3bee02e1ef984b4d440979ae014cc101a282b038a1c4de"
